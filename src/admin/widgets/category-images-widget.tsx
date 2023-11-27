@@ -48,7 +48,7 @@ const CategoriesImagesWidget = ({
           level="h1"
           className="flex items-center justify-between gap-x-4 text-2xl font-semibold"
         >
-          <div>Categories Images</div>
+          <div>Categories Images. Found {medusaProduct.categories.length} categories</div>
         </Heading>
         {loading && <Spinner></Spinner>}
         {!loading && medusaProduct.categories.map((category) => (

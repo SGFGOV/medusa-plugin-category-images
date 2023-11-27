@@ -1,10 +1,12 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, Index, JoinTable, ManyToMany, Tree } from 'typeorm';
 import {
   ProductCategory as MedusaProductCategory,
   Image,
 } from '@medusajs/medusa';
 
 @Entity()
+@Tree("materialized-path")
+@Index(["parent_category_id", "rank"], { unique: true })
 export class ProductCategory extends MedusaProductCategory {
   @ManyToMany(() => Image, { cascade: ['insert'] })
   @JoinTable({
