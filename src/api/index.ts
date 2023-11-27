@@ -1,8 +1,8 @@
 import { registerOverriddenValidators } from '@medusajs/medusa';
 import {IsArray, IsOptional, IsString} from 'class-validator';
-import { AdminPostProductsProductVariantsVariantReq as MedusaAdminPostProductsProductVariantsVariantReq } from '@medusajs/medusa/dist/api/routes/admin/products/update-variant';
+import { AdminPostProductCategoriesCategoryReq as MedusaAdminPostProductCategoriesCategoryReq } from '@medusajs/medusa/dist/api/routes/admin/product-categories'
 
-class AdminPostProductsProductVariantsVariantReq extends MedusaAdminPostProductsProductVariantsVariantReq {
+class AdminPostProductsProductCategoriesCategoryReq extends MedusaAdminPostProductCategoriesCategoryReq {
     @IsArray()
     @IsOptional()
     images?: string[];
@@ -12,4 +12,4 @@ class AdminPostProductsProductVariantsVariantReq extends MedusaAdminPostProducts
     thumbnail?: string;
 }
 
-registerOverriddenValidators(AdminPostProductsProductVariantsVariantReq);
+registerOverriddenValidators(AdminPostProductsProductCategoriesCategoryReq);

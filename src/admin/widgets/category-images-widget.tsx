@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Button, Container, DropdownMenu, Heading } from '@medusajs/ui';
 import { ProductDetailsWidgetProps, WidgetConfig } from '@medusajs/admin';
-import { ProductVariant } from '@medusajs/medusa';
+import { ProductCategory } from '@medusajs/medusa';
 import { EllipsisHorizontal, PencilSquare } from '@medusajs/icons';
-import VariantsImagesModal from '../VariantsImages/VariantsImagesModal';
+import CategoriesImagesModal from '../category-images/category-images-modal';
 
-const VariantsImagesWidget = ({
+const CategoriesImagesWidget = ({
   product,
   notify,
 }: ProductDetailsWidgetProps) => {
-  const [openedVariant, setOpenedVariant] = useState<ProductVariant | null>(
+  const [openedCategory, setOpenedCategory] = useState<ProductCategory | null>(
     null
   );
   const [openedDialogType, setOpenedDialogType] = useState<
@@ -17,23 +17,23 @@ const VariantsImagesWidget = ({
   >(null);
 
   const handleClose = () => {
-    setOpenedVariant(null);
+    setOpenedCategory(null);
     setOpenedDialogType(null);
   };
 
   return (
     <>
-      <Container title="Variants Images">
+      <Container title="Categories Images">
         <Heading
           level="h1"
           className="flex items-center justify-between gap-x-4 text-2xl font-semibold"
         >
-          <div>Variants Images</div>
+          <div>Categories Images</div>
         </Heading>
-        {product.variants.map((variant) => (
-          <div key={variant.id} className="mt-3 w-full">
+        {product.categories.map((category) => (
+          <div key={category.id} className="mt-3 w-full">
             <div className="flex items-center">
-              <div className="inter-base-semibold flex-1">{variant.title}</div>
+              <div className="inter-base-semibold flex-1">{category.name}</div>
               <DropdownMenu>
                 <DropdownMenu.Trigger asChild>
                   <Button variant="secondary" format={'icon'}>
@@ -43,7 +43,7 @@ const VariantsImagesWidget = ({
                 <DropdownMenu.Content>
                   <DropdownMenu.Item
                     onClick={() => {
-                      setOpenedVariant(variant);
+                      setOpenedCategory(category);
                       setOpenedDialogType('thumbnail');
                     }}
                     className="gap-x-2"
@@ -53,7 +53,7 @@ const VariantsImagesWidget = ({
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     onClick={() => {
-                      setOpenedVariant(variant);
+                      setOpenedCategory(category);
                       setOpenedDialogType('media');
                     }}
                     className="gap-x-2"
@@ -65,9 +65,9 @@ const VariantsImagesWidget = ({
               </DropdownMenu>
             </div>
             <div className="flex flex-wrap items-center">
-              {variant.thumbnail ? (
+              {category.thumbnail ? (
                 <img
-                  src={variant.thumbnail}
+                  src={category.thumbnail}
                   alt="Thumbnail"
                   className="mr-1 mt-1 h-20 w-20 object-cover"
                 />
@@ -77,8 +77,8 @@ const VariantsImagesWidget = ({
                 </div>
               )}
 
-              {variant.images.length ? (
-                variant.images.map((image) => (
+              {category.images.length ? (
+                category.images.map((image) => (
                   <img
                     key={image.id}
                     src={image.url}
@@ -95,10 +95,10 @@ const VariantsImagesWidget = ({
       </Container>
 
       {openedDialogType && (
-        <VariantsImagesModal
+        <CategoriesImagesModal
           product={product}
-          variant={openedVariant}
-          open={!!openedVariant}
+          category={openedCategory}
+          open={!!openedCategory}
           onClose={handleClose}
           type={openedDialogType}
           notify={notify}
@@ -112,4 +112,4 @@ export const config: WidgetConfig = {
   zone: 'product.details.after',
 };
 
-export default VariantsImagesWidget;
+export default CategoriesImagesWidget;

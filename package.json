@@ -1,11 +1,11 @@
 {
-  "name": "medusa-plugin-variant-images",
+  "name": "medusa-plugin-category-images",
   "version": "1.0.4",
-  "description": "Plugin for adding images and thumbnail to variants",
+  "description": "Plugin for adding images and thumbnail to categoryies",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/andriinuts/medusa-plugin-variant-images"
+    "url": "https://github.com/SGFGOV/medusa-plugin-category-images"
   },
   "files": [
     "dist"
@@ -50,8 +50,8 @@
   },
   "keywords": [
     "medusa-plugin",
-    "medusa-plugin-variant",
+    "medusa-plugin-category",
     "medusa-plugin-images",
-    "medusa-plugin-variant-images"
+    "medusa-plugin-category-images"
   ]
 }

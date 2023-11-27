@@ -1,16 +1,16 @@
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import {
-  ProductVariant as MedusaProductVariant,
+  ProductCategory as MedusaProductCategory,
   Image,
 } from '@medusajs/medusa';
 
 @Entity()
-export class ProductVariant extends MedusaProductVariant {
+export class ProductCategory extends MedusaProductCategory {
   @ManyToMany(() => Image, { cascade: ['insert'] })
   @JoinTable({
-    name: 'product_variant_images',
+    name: 'product_category_images',
     joinColumn: {
-      name: 'variant_id',
+      name: 'category_id',
       referencedColumnName: 'id',
     },
     inverseJoinColumn: {

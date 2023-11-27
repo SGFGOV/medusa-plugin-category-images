@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { Controller, FieldArrayWithId, useFieldArray } from 'react-hook-form';
-import { NestedForm } from './utils/nestedForm';
+import { NestedForm } from './utils/nested-form';
 import { FormImage } from './utils/images';
-import FileUploadField from './components/FileUploadField';
+import FileUploadField from './components/file-upload-field';
 import { CheckCircleSolid } from '@medusajs/icons';
 import { useRef } from 'react';
 
@@ -17,7 +17,7 @@ type Props = {
   type: 'thumbnail' | 'media';
 };
 
-const VariantsImagesMediaForm = ({ form, type }: Props) => {
+const CategoriesImagesMediaForm = ({ form, type }: Props) => {
   const { control, path, setValue } = form;
 
   const singleSelection = type === 'thumbnail';
@@ -70,9 +70,9 @@ const VariantsImagesMediaForm = ({ form, type }: Props) => {
             <h2 className="inter-large-semibold mb-2xsmall">Uploads</h2>
             <p className="inter-base-regular text-grey-50 mb-large">
               {type === 'thumbnail' ? (
-                <span>Select an image to use as variant thumbnail.</span>
+                <span>Select an image to use as category thumbnail.</span>
               ) : (
-                <span>Select images to use as variant images.</span>
+                <span>Select images to use as category images.</span>
               )}
             </p>
           </div>
@@ -153,4 +153,4 @@ const Image = ({ image, index, form, onSelected }: ImageProps) => {
   );
 };
 
-export default VariantsImagesMediaForm;
+export default CategoriesImagesMediaForm;

@@ -1,17 +1,17 @@
-import { Product, ProductVariant } from '@medusajs/medusa';
+import { Product, ProductCategory } from '@medusajs/medusa';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   useAdminUpdateProduct,
-  useAdminUpdateVariant,
+  useAdminUpdateProductCategory,
   useMedusa,
 } from 'medusa-react';
 import { Button, FocusModal } from '@medusajs/ui';
-import { nestedForm } from './utils/nestedForm';
+import { nestedForm } from './utils/nested-form';
 import { prepareImages } from './utils/images';
-import VariantsImagesMediaForm, {
+import CategoriesImagesMediaForm, {
   MediaFormType,
-} from './VariantsImagesMediaForm';
+} from './category-images-media-form';
 
 type Notify = {
   success: (title: string, message: string) => void;
@@ -29,7 +29,7 @@ export type FormImage = {
 
 type Props = {
   product: Product;
-  variant: ProductVariant;
+  category: ProductCategory;
   open: boolean;
   onClose: () => void;
   notify: Notify;
@@ -40,8 +40,8 @@ type MediaFormWrapper = {
   media: MediaFormType;
 };
 
-const VariantsImagesModal = ({
-  variant,
+const CategoriesImagesModal = ({
+  category,
   open,
   onClose,
   product,
@@ -50,10 +50,10 @@ const VariantsImagesModal = ({
 }: Props) => {
   const { client } = useMedusa();
   const [isUpdating, setIsUpdating] = useState(false);
-  const adminUpdateVariant = useAdminUpdateVariant(product?.id);
+  const adminUpdateCategory = useAdminUpdateProductCategory(category?.id);
   const adminUpdateProduct = useAdminUpdateProduct(product?.id);
   const form = useForm<MediaFormWrapper>({
-    defaultValues: getDefaultValues(product, variant, type),
+    defaultValues: getDefaultValues(product, category, type),
   });
 
   const {
@@ -63,11 +63,11 @@ const VariantsImagesModal = ({
   } = form;
 
   useEffect(() => {
-    reset(getDefaultValues(product, variant, type));
-  }, [reset, product, variant, type]);
+    reset(getDefaultValues(product, category, type));
+  }, [reset, product, category, type]);
 
   const onReset = () => {
-    reset(getDefaultValues(product, variant, type));
+    reset(getDefaultValues(product, category, type));
     onClose();
   };
 
@@ -92,14 +92,14 @@ const VariantsImagesModal = ({
       return;
     }
     const urls = preppedImages.map((image) => image.url);
-    await adminUpdateProduct.mutate({ images: urls });
+    await adminUpdateProduct.mutateAsync({ images: urls });
 
     if (type === 'thumbnail') {
       const thumbnail =
         data.media.images.find((image) => image.selected)?.url || null;
 
-      await adminUpdateVariant.mutate({
-        variant_id: variant.id,
+      await adminUpdateCategory.mutateAsync({
+      
         // @ts-ignore
         thumbnail,
       });
@@ -108,8 +108,8 @@ const VariantsImagesModal = ({
         .map(({ selected }, i: number) => selected && urls[i])
         .filter(Boolean);
 
-      await adminUpdateVariant.mutate({
-        variant_id: variant.id,
+      await adminUpdateCategory.mutateAsync({
+        
         // @ts-ignore
         images,
       });
@@ -128,20 +128,20 @@ const VariantsImagesModal = ({
             type="submit"
             disabled={!isDirty}
             isLoading={isUpdating}
-            form="variant-images-form"
+            form="category-images-form"
           >
             Save and close
           </Button>
         </FocusModal.Header>
         <FocusModal.Body className=" p-4">
-          <form onSubmit={onSubmit} id="variant-images-form">
+          <form onSubmit={onSubmit} id="category-images-form">
             <div>
               <h2 className="inter-large-semibold mb-2xsmall">Media</h2>
               <p className="inter-base-regular text-grey-50 mb-large">
                 Add images to your product media.
               </p>
               <div>
-                <VariantsImagesMediaForm
+                <CategoriesImagesMediaForm
                   form={nestedForm(form, 'media')}
                   type={type}
                 />
@@ -156,7 +156,7 @@ const VariantsImagesModal = ({
 
 const getDefaultValues = (
   product: Product,
-  variant: ProductVariant,
+  category: ProductCategory,
   type: 'thumbnail' | 'media'
 ): MediaFormWrapper => {
   return {
@@ -166,12 +166,12 @@ const getDefaultValues = (
           url: image.url,
           selected:
             type === 'thumbnail'
-              ? variant.thumbnail === image.url
-              : variant?.images?.some((vImage) => vImage.url === image.url) ??
+              ? category.thumbnail === image.url
+              : category?.images?.some((vImage) => vImage.url === image.url) ??
                 false,
         })) || [],
     },
   };
 };
 
-export default VariantsImagesModal;
+export default CategoriesImagesModal;
