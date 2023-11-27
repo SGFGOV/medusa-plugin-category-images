@@ -10,7 +10,7 @@
   "files": [
     "dist"
   ],
-  "author": "Andrii Nutskovskyi <andrii.nutskovskyi@gmail.com>",
+  "author": "Govind Diwakar <SGF@sourcegoodfood.com>",
   "license": "MIT",
   "scripts": {
     "prepare": "cross-env NODE_ENV=production yarn run build",

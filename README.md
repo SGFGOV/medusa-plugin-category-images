@@ -1,13 +1,13 @@
-# Medusa-Plugin-Variant-Images
+# Medusa-Plugin-Category-Images
 
-Adding possibility to add images to the product variants.
+Adding possibility to add images to the product categories.
 
 # Getting started
 
 Installation
 
 ```bash
-yarn add medusa-plugin-variant-images
+yarn add medusa-plugin-category-images
 ```
 
 # Usage
@@ -31,7 +31,7 @@ add to your plugins list
 ```
 ///...other plugins
   {
-    resolve: 'medusa-plugin-variant-images',
+    resolve: 'medusa-plugin-category-images',
     options: {
       enableUI: true,
     },
@@ -41,12 +41,12 @@ add to your plugins list
 
 ### Update database schema
 
-Run the following command from the root of the project to udpate database with a new table required for storing product variant
+Run the following command from the root of the project to udpate database with a new table required for storing product category
 
 ```
 npx medusa migrations run
 ```
 
-### How to get images from variant
+### How to get images from category
 
-After enabling this plugin, each variant will contains `images` and `thumbnail` fields.
+After enabling this plugin, each category will contains `images` and `thumbnail` fields.
