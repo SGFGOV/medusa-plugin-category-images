@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Button, Container, DropdownMenu, Heading } from '@medusajs/ui';
 import { ProductDetailsWidgetProps, WidgetConfig } from '@medusajs/admin';
-import { ProductCategory } from '@medusajs/medusa';
-import { EllipsisHorizontal, PencilSquare } from '@medusajs/icons';
+import { Product, ProductCategory } from '@medusajs/medusa';
+import { EllipsisHorizontal, PencilSquare, Spinner } from '@medusajs/icons';
 import CategoriesImagesModal from '../category-images/category-images-modal';
+import { useAdminUpdateProductCategory,useAdminProduct, useMedusa } from 'medusa-react';
 
 const CategoriesImagesWidget = ({
   product,
   notify,
 }: ProductDetailsWidgetProps) => {
+   useAdminUpdateProductCategory
+  const medusa= useMedusa()
+  const [medusaProduct,setMedusaProduct] = useState<Product>(null);
+  const [loading,setLoading] = useState(true);
+
+
+  useEffect(()=>{
+    const fetchProductsWithCategories = async() =>
+    {
+      const productWithCategory = await medusa.client.admin.products.retrieve(product.id,{
+        relations:["categories"]
+      })
+      setMedusaProduct(productWithCategory.product);
+      setLoading(false);
+    }
+    fetchProductsWithCategories()
+  },[])
+
+  
   const [openedCategory, setOpenedCategory] = useState<ProductCategory | null>(
     null
   );
@@ -30,7 +50,8 @@ const CategoriesImagesWidget = ({
         >
           <div>Categories Images</div>
         </Heading>
-        {product.categories.map((category) => (
+        {loading && <Spinner></Spinner>}
+        {!loading && medusaProduct.categories.map((category) => (
           <div key={category.id} className="mt-3 w-full">
             <div className="flex items-center">
               <div className="inter-base-semibold flex-1">{category.name}</div>
