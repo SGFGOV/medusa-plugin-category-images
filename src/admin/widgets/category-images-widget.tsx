@@ -4,7 +4,7 @@ import { ProductDetailsWidgetProps, WidgetConfig } from '@medusajs/admin';
 import { Product, ProductCategory } from '@medusajs/medusa';
 import { EllipsisHorizontal, PencilSquare, Spinner } from '@medusajs/icons';
 import CategoriesImagesModal from '../category-images/category-images-modal';
-import { useAdminUpdateProductCategory,useAdminProduct, useMedusa } from 'medusa-react';
+import { useAdminUpdateProductCategory,useAdminProduct, useMedusa, useProduct } from 'medusa-react';
 
 const CategoriesImagesWidget = ({
   product,
@@ -20,7 +20,7 @@ const CategoriesImagesWidget = ({
     const fetchProductsWithCategories = async() =>
     {
       const productWithCategory = await medusa.client.admin.products.retrieve(product.id,{
-        relations:["categories"]
+        relations:["categories","categories.images"]
       })
       setMedusaProduct(productWithCategory.product);
       setLoading(false);
@@ -48,9 +48,10 @@ const CategoriesImagesWidget = ({
           level="h1"
           className="flex items-center justify-between gap-x-4 text-2xl font-semibold"
         >
-          <div>Categories Images. Found {medusaProduct.categories.length} categories</div>
-        </Heading>
+          </Heading>
         {loading && <Spinner></Spinner>}
+        {!loading && (<div>Categories Images. Found {medusaProduct?.categories?.length} categories</div>)}
+        
         {!loading && medusaProduct.categories.map((category) => (
           <div key={category.id} className="mt-3 w-full">
             <div className="flex items-center">
