@@ -1,6 +1,6 @@
 {
   "name": "medusa-plugin-category-images",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Plugin for adding images and thumbnail to categoryies",
   "main": "dist/index.js",
   "repository": {
