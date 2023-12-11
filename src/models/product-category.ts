@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinTable, ManyToMany, Tree } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, JoinTable, ManyToMany, Tree, TreeChildren, TreeParent } from 'typeorm';
 import {
   ProductCategory as MedusaProductCategory,
   Image,
@@ -24,4 +24,13 @@ export class ProductCategory extends MedusaProductCategory {
 
   @Column({ type: 'text', nullable: true })
   thumbnail: string | null
+
+  @TreeParent()
+  @JoinColumn({ name: "parent_category_id" })
+  parent_category: ProductCategory | null
+
+  @TreeChildren({ cascade: true })
+  category_children: ProductCategory[]
+
+
 }
