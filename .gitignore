@@ -8,3 +8,4 @@
 yarn-error.log
 /.idea
 compose-dev.yaml
+!.eslintrc.js
