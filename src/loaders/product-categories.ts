@@ -1,24 +1,31 @@
 export default async function () {
-  const adminCategoriesImports = (await import(
-    '@medusajs/medusa/dist/api/routes/admin/product-categories/index'
+  const adminImports = (await import(
+    "@medusajs/medusa/dist/api/routes/admin/product-categories/index"
   )) as any;
 
-  const storeCategoriesImports = (await import(
-      '@medusajs/medusa/dist/api/routes/store/product-categories/index'
+  const storeImports = (await import(
+    "@medusajs/medusa/dist/api/routes/store/product-categories/index"
   )) as any;
 
-  adminCategoriesImports.defaultAdminCategoryRelations = [
-    ...adminCategoriesImports.defaultAdminCategoryRelations,
-    'images',
+  adminImports.defaultAdminProductCategoryRelations = [
+    ...(adminImports.defaultAdminProductCategoryRelations ?? []),
+    "images",
   ];
 
-  storeCategoriesImports.defaultStoreCategoryRelations = [
-    ...storeCategoriesImports.defaultStoreCategoryRelations,
-    'images',
+  adminImports.defaultAdminProductCategoryFields = [
+    ...(adminImports.defaultAdminProductCategoryFields ?? []),
+    "images",
+    "thumbnail",
   ];
 
-  storeCategoriesImports.allowedStoreCategoryRelations = [
-    ...storeCategoriesImports.allowedStoreCategoryRelations,
-    'images',
+  storeImports.defaultStoreProductCategoryRelations = [
+    ...(storeImports.defaultStoreProductCategoryRelations ?? []),
+    "images",
+  ];
+
+  storeImports.defaultStoreProductCategoryFields = [
+    ...(storeImports.defaultStoreProductCategoryFields ?? []),
+    "images",
+    "thumbnail",
   ];
 }
