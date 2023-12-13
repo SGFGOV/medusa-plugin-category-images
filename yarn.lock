@@ -9220,6 +9220,16 @@ medusa-core-utils@1.2.0, medusa-core-utils@^1.2.0:
   resolved "https://registry.yarnpkg.com/medusa-core-utils/-/medusa-core-utils-1.2.0.tgz#4a2aa9fd63dacda487b220c8e462540990605092"
   integrity sha512-9mzXGkMsll92C46Ub8A9vwjcfFiHfdkgshwmPP9QpRrm02M6N+SQb45S2A9t0dKjyT9J7rgCCSrFhYQg3pvqbw==
 
+medusa-plugin-category-images@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/medusa-plugin-category-images/-/medusa-plugin-category-images-1.0.12.tgz#e6e46ce2664c1473a19c4111f7f64a0dba5a1d23"
+  integrity sha512-yQ26RkfMP5rAXnQ3TVYdDHt+SGSfNjBqZBSipuIWie10o6Q7Wnfc9iQZbIySUdtlXTM+IkHUjNZteBKsd4VpAg==
+  dependencies:
+    body-parser "^1.19.0"
+    express "^4.17.1"
+    medusa-core-utils "^1.2.0"
+    typeorm "^0.3.17"
+
 medusa-react@*, medusa-react@^9.0.4:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/medusa-react/-/medusa-react-9.0.4.tgz#40525616f8dfcad73bc7e497e79b3b96c2e7c025"
