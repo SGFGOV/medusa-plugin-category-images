@@ -1,11 +1,11 @@
 import { dataSource } from "@medusajs/medusa/dist/loaders/database";
 import { ProductCategory } from "../models/product-category";
-import { ProductCategoryRepository as MedusaProductCategoryRepository } from "@medusajs/medusa/dist/repositories/product-category";
+import MedusaProductCategoryRepository from "@medusajs/medusa/dist/repositories/product-category";
 
 export const ProductCategoryRepository = dataSource
     .getTreeRepository(ProductCategory)
     .extend({
-        ...MedusaProductCategoryRepository
+        ...Object.getPrototypeOf(MedusaProductCategoryRepository)
     });
 
 export default ProductCategoryRepository;
