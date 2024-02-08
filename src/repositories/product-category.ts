@@ -5,7 +5,7 @@ import MedusaProductCategoryRepository from "@medusajs/medusa/dist/repositories/
 export const ProductCategoryRepository = dataSource
     .getTreeRepository(ProductCategory)
     .extend({
-        ...MedusaProductCategoryRepository
+        ...Object.getPrototypeOf(MedusaProductCategoryRepository)
     });
 
 export default ProductCategoryRepository;

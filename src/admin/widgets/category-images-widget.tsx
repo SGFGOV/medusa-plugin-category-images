@@ -4,12 +4,7 @@ import { ProductDetailsWidgetProps, WidgetConfig } from "@medusajs/admin";
 import { Product, ProductCategory } from "@medusajs/medusa";
 import { EllipsisHorizontal, PencilSquare, Spinner } from "@medusajs/icons";
 import CategoriesImagesModal from "../category-images/category-images-modal";
-import {
-    useAdminUpdateProductCategory,
-    useAdminProduct,
-    useMedusa,
-    useProduct
-} from "medusa-react";
+import { useAdminUpdateProductCategory, useMedusa } from "medusa-react";
 
 const CategoriesImagesWidget = ({
     product,

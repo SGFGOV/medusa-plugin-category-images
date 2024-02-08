@@ -1,6 +1,6 @@
 {
   "name": "medusa-plugin-category-images",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Plugin for adding images and thumbnail to categories",
   "main": "dist/index.js",
   "repository": {
@@ -38,7 +38,8 @@
     "medusa-react": "^9.0.4",
     "mongoose": "^5.13.14",
     "prettier": "^2.7.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "typeorm": "^0.3.20"
   },
   "peerDependenciesMeta": {
     "medusa-react": {
@@ -50,14 +51,15 @@
     "@medusajs/icons": "^1.0.0",
     "@medusajs/medusa": "^1.14.0",
     "@medusajs/ui": "^1.0.0",
-    "medusa-react": "^9.0.4"
+    "medusa-react": "^9.0.4",
+    "typeorm": "^0.3.20"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "medusa-core-utils": "^1.2.0",
     "medusa-plugin-category-images": "^1.0.12",
-    "typeorm": "^0.3.17"
+    
   },
   "keywords": [
     "medusa-plugin",
