@@ -1,24 +1,15 @@
-export default async function () {
-  const adminCategoriesImports = (await import(
-    '@medusajs/medusa/dist/api/routes/admin/product-categories/index'
-  )) as any;
+/* eslint-disable require-jsdoc */
 
-  const storeCategoriesImports = (await import(
-      '@medusajs/medusa/dist/api/routes/store/product-categories/index'
-  )) as any;
+import { defaultAdminProductCategoryRelations } from "@medusajs/medusa/dist/api/routes/admin/product-categories/index";
+import {
+    defaultStoreProductCategoryRelations,
+    allowedStoreProductCategoryFields
+} from "@medusajs/medusa/dist/api/routes/store/product-categories/index";
 
-  adminCategoriesImports.defaultAdminCategoryRelations = [
-    ...adminCategoriesImports.defaultAdminCategoryRelations,
-    'images',
-  ];
+export default async function (): Promise<void> {
+    defaultAdminProductCategoryRelations.push("images");
 
-  storeCategoriesImports.defaultStoreCategoryRelations = [
-    ...storeCategoriesImports.defaultStoreCategoryRelations,
-    'images',
-  ];
+    defaultStoreProductCategoryRelations.push("images");
 
-  storeCategoriesImports.allowedStoreCategoryRelations = [
-    ...storeCategoriesImports.allowedStoreCategoryRelations,
-    'images',
-  ];
+    allowedStoreProductCategoryFields.push("images");
 }
