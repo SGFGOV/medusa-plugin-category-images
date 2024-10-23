@@ -13,7 +13,7 @@ import ProductCategoryRepository from "../repositories/product-category";
 import { EntityManager } from "typeorm";
 
 type UpdateProductCategoryInput = {
-    images: string[];
+    images?: string[];
 } & MedusaUpdateProductCategoryInput;
 
 class ProductCategoryService extends MedusaProductCategoryService {
